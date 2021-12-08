@@ -55,8 +55,8 @@ export default class ContactForm extends Component {
                 <input
                     type="tel"
                     name="number"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
-                    placeholder="012-345-67-89"
+                    pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                    placeholder="123-45-67"
                     value={number}
                     onChange={this.handleInputChange}
                 ></input>
