@@ -5,48 +5,40 @@ import Filter from './components/Filter';
 
 class App extends Component {
     state = {
-        contacts: [],
+        contacts: [
+            { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+            { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+            { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+            { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+        ],
         filter: '',
     };
 
-componentDidMount() {
-    if (localStorage.getItem("contacts") !== null) {
-      const contacts = JSON.parse(localStorage.getItem("contacts"));
-      this.setState({ contacts: contacts });
-    }
-  }
-
-componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
-    }
-  }
-    
-    handleSubmitForm = (newContact) => {
+    handleSubmitForm = newContact => {
         this.setState(({ contacts }) => ({
             contacts: [...contacts, newContact],
         }));
     };
 
-    handleUniceContact = (name) => {
+    handleUniceContact = name => {
         const { contacts } = this.state;
-        const isContactThere = contacts.find((contact) => contact.name === name);
+        const isContactThere = contacts.find(contact => contact.name === name);
         if (isContactThere) {
             alert('Contact is exist');
             return;
         }
         return !isContactThere;
     };
-    handleRemoveContact = (id) =>
+    handleRemoveContact = id =>
         this.setState(({ contacts }) => ({
             contacts: contacts.filter(contact => contact.id !== id),
         }));
 
-    handleFilterSearch = (filter) => this.setState({ filter });
+    handleFilterSearch = filter => this.setState({ filter });
 
     filterContacts = () => {
         const { contacts, filter } = this.state;
-        return contacts.filter((contact) =>
+        return contacts.filter(contact =>
             contact.name.toLowerCase().includes(filter.toLowerCase()),
         );
     };
